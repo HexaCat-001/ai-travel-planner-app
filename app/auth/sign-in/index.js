@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, ScrollView, View, ToastAndroid } from 'react-native'
 import React, { useEffect,useState } from 'react'
-import { useNavigation, useRouter } from 'expo-router'
+import { router, useNavigation, useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Colors } from '@/constants/Colors'
 import { Ionicons } from '@expo/vector-icons';
@@ -30,7 +30,8 @@ const SignIn = () => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log(user)
+        // console.log(user)
+        router.replace('/mytrip')
         // ...
       })
       .catch((error) => {

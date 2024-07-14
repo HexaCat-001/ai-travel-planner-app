@@ -19,12 +19,6 @@ const Login = () => {
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <StatusBar
-          barStyle="dark-content" // Set text color
-          backgroundColor="#F8F4E1" // Set background color
-          hidden={false}
-          translucent={true} // Make it translucent
-        />
         <Image
           source={require("./../assets/images/login.jpeg")}
           style={styles.loginImage}
