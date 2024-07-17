@@ -1,9 +1,13 @@
+import React, { useEffect } from 'react';
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
-import React from "react";
+import { SplashScreen, Stack } from "expo-router";
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs(); // Ignores all logs
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  useFonts({
+  const [fontsLoaded,error]=useFonts({
     'outfit': require('./../assets/fonts/Outfit-Regular.ttf'),
     'outfit-medium': require('./../assets/fonts/Outfit-Medium.ttf'),
     'outfit-bold': require('./../assets/fonts/Outfit-Bold.ttf'),
@@ -12,14 +16,20 @@ export default function RootLayout() {
     'comfortaa-bold': require('./../assets/fonts/Comfortaa-Bold.ttf'),
 
   })
+
+  useEffect(() => {
+    if (fontsLoaded) SplashScreen.hideAsync();
+  }, [fontsLoaded, error])
+
+  if (!fontsLoaded && !error) return null;
   return (
     <Stack screenOptions={{
-      headerShown: true,
+      headerShown: false,
     }}>
       {/* <Stack.Screen name="index" options={{
         headerShown:false,
       }}/> */}
-      <Stack.Screen name="tabs" />
+      <Stack.Screen name="(tabs)" />
     </Stack>
   );
 }
